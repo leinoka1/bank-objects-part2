@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bank-Objects</title>
+    <link rel="stylesheet" href="banks.css">
+  <link rel="stylesheet"
+          href="material.css">
+
+
+<script src = "lib/lodash.js"></script>
+</head>
+<body>
+<button class="mdc-button">
+    Text button
+</button>
+<img src="banking.jpg" width="220" height = "300">
+<p id="hello-text" class="banking-title">Banking User Interface</p>
+<button onclick="myFunction()"> Press </button>
+
+<input id="firstName" type="text" value="Kari"/>
+<input id="lastName" type="text" value="Leino"/>
+<button onclick="">Add</button>
+<form>
+      <fieldset>
+        <legend>Customer</legend>
+        First Name: <input id="customerFirstName" type="text"><br>
+         Last Name: <input type="text"><br>
+           Account: <input type="text">
+      </fieldset>
+</form>
+<form>
+      <fieldset>
+        <legend>Bank</legend>
+        Bank Name: <input type="text"><br>
+              BIC: <input type="text"><br>
+         Accounts: <input type="text">
+      </fieldset>
+</form>
+<form>
+      <fieldset>
+        <legend>Account</legend>
+        Bank Name: <input type="text"><br>
+              BIC: <input type="text"><br>
+         Accounts: <input type="text">
+      </fieldset>
+</form>
+<form>
+      <fieldset>
+        <legend>Balance:</legend>
+        Account: <input type="text"><br>
+           Euro: <input type="text"><br>
+      </fieldset>
+</form>
+<p id="bank-info"></p>
+<p id="customer-info"></p>
+<p id="customer-list"> </p>
+<p id="customer-list2"> </p>
+<script src="banks.js"></script>
+<script src="customers.js"></script>
+<script>
+    //document.getElementById("bank-info").innerHTML = bank.print();
+    // document.getElementById("customer-info").innerHTML = bank.getCustomers();
+    //
+    for (var i = 0, len = banks.length; i < len; i++) {
+
+       // var customers = bankObjects.data.getCustomers();
+       //  var filteredCustomers = _.filter(customers, {bankId: 1});
+    var customers = banks[i].getCustomers();
+    var filteredCustomers = _.filter(customers, {bankId: 1});
+    console.log(filteredCustomers);
+    }
+</script>
+<script>
+
+function myFunction() {
+    var firstName = document.getElementById('customerFirstName').value;
+    console.log(firstName);
+  //  var pBank = document.createElement("P");
+    //var tBank = document.createTextNode(banks[1].name);
+    //console.log(tBank);
+    //pBank.appendChild(tBank);
+    //document.body.appendChild(pBank);
+    for (var j = 0, len = banks.length; j < len; j++){
+        var pBank = document.createElement("P");
+        var tBank = document.createTextNode(banks[j].name);
+        console.log(tBank);
+        pBank.appendChild(tBank);
+        document.body.appendChild(pBank);
+        for (var i = 0, len = banks[j].getCustomers().length; i < len; i++) {
+            // console.log(customerL[i]);
+            // var i = 0;
+            //     document.getElementById("customer-list").innerHTML = bank.getCustomers()[i].lastName + "," + bank.getCustomers()[i].firstName + "<br>";
+            var para = document.createElement("P");
+            var customerListLong = ' -> ' + banks[j].getCustomers()[i].id + ' -> ' + banks[j].getCustomers()[i].lastName + ',' + banks[j].getCustomers()[i].firstName;
+
+            var t = document.createTextNode(customerListLong);
+            para.appendChild(t);
+            document.body.appendChild(para);
+            // document.getElementById(my).innerHTML = "kissa <br> koira";
+            //i++;
+        }
+    }
+}
+
+
+</script>
+
+<script>/*
+    customerL.forEach(customerList);
+    customerList = document.getElementById("customer-list");
+    // var numbers = [4, 9, 16, 25];
+
+    function customerList(item, index) {
+        customerList.innerHTML = customerList.innerHTML + "index[" + index + "]: " + item + "<br>";
+    }
+*/
+</script>
+</body>
+</html>

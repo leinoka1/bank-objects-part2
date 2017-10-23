@@ -1,0 +1,21 @@
+
+html{
+    font-family: sans-serif;
+}
+
+.banking-title {
+    font-size: 26px;
+    color: red;
+
+}
+.banking-body-text{
+    font-size: 16px;
+    color: red;
+}
+.banking-title:hover{
+    color:red;
+}
+
+body{
+    background: auto ;
+}

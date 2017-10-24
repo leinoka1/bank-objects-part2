@@ -16,7 +16,7 @@
 </button>
 <img src="banking.jpg" width="220" height = "300">
 <p id="hello-text" class="banking-title">Banking User Interface</p>
-<button onclick="myFunction()"> Press </button>
+<button onclick="listAllCustomersAndBanks()"> Press to Get All Customers And Banks </button>
 
 <input id="firstName" type="text" value="Kari"/>
 <input id="lastName" type="text" value="Leino"/>
@@ -62,37 +62,34 @@
     //document.getElementById("bank-info").innerHTML = bank.print();
     // document.getElementById("customer-info").innerHTML = bank.getCustomers();
     //
-    for (var i = 0, len = banks.length; i < len; i++) {
+    var selectedBank = banking.banks[0];
 
-       // var customers = bankObjects.data.getCustomers();
-       //  var filteredCustomers = _.filter(customers, {bankId: 1});
-    var customers = banks[i].getCustomers();
-    var filteredCustomers = _.filter(customers, {bankId: 1});
-    console.log(filteredCustomers);
-    }
+    var customers = _.filter(selectedBank.getCustomers(), {firstName: 'Ari'});
+    console.log(customers);
 </script>
 <script>
-
-function myFunction() {
     var firstName = document.getElementById('customerFirstName').value;
     console.log(firstName);
-  //  var pBank = document.createElement("P");
+function listAllCustomersAndBanks() {
+    //var firstName = document.getElementById('customerFirstName').value;
+    //console.log(firstName);
+    //var pBank = document.createElement("P");
     //var tBank = document.createTextNode(banks[1].name);
     //console.log(tBank);
     //pBank.appendChild(tBank);
     //document.body.appendChild(pBank);
-    for (var j = 0, len = banks.length; j < len; j++){
+    for (var j = 0, len = banking.banks.length; j < len; j++){
         var pBank = document.createElement("P");
-        var tBank = document.createTextNode(banks[j].name);
+        var tBank = document.createTextNode(banking.banks[j].name);
         console.log(tBank);
         pBank.appendChild(tBank);
         document.body.appendChild(pBank);
-        for (var i = 0, len = banks[j].getCustomers().length; i < len; i++) {
+        for (var i = 0, len = banking.banks[j].getCustomers().length; i < len; i++) {
             // console.log(customerL[i]);
             // var i = 0;
             //     document.getElementById("customer-list").innerHTML = bank.getCustomers()[i].lastName + "," + bank.getCustomers()[i].firstName + "<br>";
             var para = document.createElement("P");
-            var customerListLong = ' -> ' + banks[j].getCustomers()[i].id + ' -> ' + banks[j].getCustomers()[i].lastName + ',' + banks[j].getCustomers()[i].firstName;
+            var customerListLong = ' -> ' + banking.banks[j].getCustomers()[i].id + ' -> ' + banking.banks[j].getCustomers()[i].lastName + ',' + banking.banks[j].getCustomers()[i].firstName;
 
             var t = document.createTextNode(customerListLong);
             para.appendChild(t);

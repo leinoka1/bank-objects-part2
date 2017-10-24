@@ -19,6 +19,10 @@ banking.bank = function (name, bicCode, id) {
     function getCustomers(){
                 return customers;
     }
+
+    function setCustomer(customer){
+        customers.push(customer);
+    }
     function addAccountToBank(account) {
         accounts.push(account);
     }
@@ -70,9 +74,9 @@ banking.account = function (account, accountName, balance) {
         balance: balance
     }
 };
-var banks = [];
+banking.banks = [];
 banking.addBank = function(bank) {
-    banks.push(bank);
+    banking.banks.push(bank);
 
 }
 //var bank = banking.bank('Osuuspankki', 'OKOYFIH', 1);
@@ -92,11 +96,11 @@ var firstAccount = banking.account('FI5078327927392', 'STili',121);
 var secondAccount = banking.account('FI4068969995511','PTili',303);
 //
 
-banks[0].addCustomer(firstCustomer);
-banks[1].addCustomer(secondCustomer);
-banks[0].addCustomer(thirdCustomer);
-banks[0].addAccount(firstAccount);
-banks[1].addAccount(secondAccount);
+banking.banks[0].addCustomer(firstCustomer);
+banking.banks[1].addCustomer(secondCustomer);
+banking.banks[0].addCustomer(thirdCustomer);
+banking.banks[0].addAccount(firstAccount);
+banking.banks[1].addAccount(secondAccount);
 
 //console.log(bank.getCustomers());
 //console.log(secondAccount);

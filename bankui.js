@@ -15,13 +15,13 @@ function popCustomerList(element, bank2) {
         console.log('cust: ' + customersXyz.firstName);
         var option = document.createElement('option');
         option.value = customersXyz.customerId;
-        option.text = customersXyz.lastName + ' ' + customersXyz.firstName;
+        option.text = customersXyz.bankIdAtCustomer + ' ' + customersXyz.lastName + ' ' + customersXyz.firstName;
 
-        option.dataset.bankId = customersXyz.bankId;
+        option.dataset.bankId = customersXyz.bankIdAtCustomer;
         option.dataset.firstName = customersXyz.firstName;
         option.dataset.lastName = customersXyz.lastName;
 
-
+        console.log('bankId: ' + customersXyz.bankId);
         console.log('option: '+option);
         list.appendChild(option);
 

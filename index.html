@@ -4,23 +4,38 @@
     <meta charset="UTF-8">
     <title>Bank-Objects</title>
     <link rel="stylesheet" href="banks.css">
-  <link rel="stylesheet"
-          href="material.css">
-
+  <link rel="stylesheet" href="material.css">
 
 <script src = "lib/lodash.js"></script>
+
 </head>
 <body>
-<button class="mdc-button">
-    Text button
-</button>
-<img src="banking.jpg" width="220" height = "300">
-<p id="hello-text" class="banking-title">Banking User Interface</p>
-<button onclick="listAllCustomersAndBanks()"> Press to Get All Customers And Banks </button>
 
-<input id="firstName" type="text" value="Kari"/>
-<input id="lastName" type="text" value="Leino"/>
-<button onclick="">Add</button>
+<script>
+
+    var customerDropDownList = 'cusDrDoLi';
+
+</script>
+<img src="banking.jpg" width="220" height = "300">
+
+<script src="banks.js"></script>
+<script src="bankui.js"></script>
+<script src="customers.js"></script>
+
+<p id="hello-text" class="banking-title">Banking User Interface</p>
+<button onclick="selectBank()"> Press to Select a Banks </button>
+<button onclick="listAllCustomersAndBanks()"> Press to Update Banks </button>
+<button onclick="listCustomers()"> Press to Show Customers </button>
+
+<form>
+      <fieldset>
+        <legend>Bank</legend>
+         Bank Name: <input id="bankName" type="text"><br>
+               BIC: <input id="bicCode" type ="text"><br>
+         Customers: <input id="customers"type="text">
+      </fieldset>
+</form>
+
 <form>
       <fieldset>
         <legend>Customer</legend>
@@ -29,14 +44,10 @@
            Account: <input type="text">
       </fieldset>
 </form>
-<form>
-      <fieldset>
-        <legend>Bank</legend>
-        Bank Name: <input type="text"><br>
-              BIC: <input type="text"><br>
-         Accounts: <input type="text">
-      </fieldset>
-</form>
+<button onclick="popCustomerList('akList',0)"> Press to Show Customers as Drop down list </button>
+<select id="akList" >
+    <option value = option.value>Customers</option>
+</select>
 <form>
       <fieldset>
         <legend>Account</legend>
@@ -52,13 +63,25 @@
            Euro: <input type="text"><br>
       </fieldset>
 </form>
+
 <p id="bank-info"></p>
 <p id="customer-info"></p>
 <p id="customer-list"> </p>
 <p id="customer-list2"> </p>
-<script src="banks.js"></script>
-<script src="customers.js"></script>
+
+
 <script>
+function alertConsole (){
+    console.log ('working....');
+}
+
+</script>
+
+<script>
+    document.getElementById("bankName").textContent = 'OKO';
+    </script>
+    <script>
+
     //document.getElementById("bank-info").innerHTML = bank.print();
     // document.getElementById("customer-info").innerHTML = bank.getCustomers();
     //
@@ -68,16 +91,132 @@
     console.log(customers);
 </script>
 <script>
-    var firstName = document.getElementById('customerFirstName').value;
-    console.log(firstName);
+    function selectBank() {
+        var bankName = document.getElementById('bankName').value;
+        console.log(bankName);
+
+        if (bankName == 'OP' || bankName == 'OKO' || bankName == 'Osuuspankki' || bankName == 'OSUUSPANKKI') {
+            //console.log (bankName+' OK ');
+            document.getElementById("bankName").value = 'Osuuspankki';
+            for (var j = 0, len = banking.banks.length; j < len; j++) {
+                if (banking.banks[j].name == document.getElementById("bankName").value) {
+                    console.log('Valittu pankki ' + banking.banks[j].name);
+                    document.getElementById("bicCode").value = banking.banks[j].bicCode;
+                    for (var k = 0, len = banking.banks[j].getCustomers().length; k < len; k++) {
+                        console.log('pituus on ' + len + ' k on ' + k);
+                        console.log('Pankki id ' + banking.banks[j].bankId);
+                        console.log('customer bankIdAtCustomer ' + banking.banks[j].getCustomers()[k].bankIdAtCustomer);
+                        if (banking.banks[j].getCustomers()[k].bankIdAtCustomer == banking.banks[j].bankId) {
+                            console.log('j on ' + j);
+                            console.log('k on ' + k);
+                            document.getElementById("customers").value = banking.banks[j].getCustomers()[k].lastName + ',' + banking.banks[j].getCustomers()[k].firstName;
+                            var para = document.createElement("P");
+                            var customerListLong = ' -> ' + banking.banks[j].getCustomers()[k].customerId + ' -> ' + banking.banks[j].getCustomers()[k].lastName + ',' + banking.banks[j].getCustomers()[k].firstName;
+                            var t = document.createTextNode(customerListLong);
+                            para.appendChild(t);
+                            document.body.appendChild(para);
+                            console.log('asiakas ' + t);
+                            // document.getElementById("accounts").value = banking.banks[j].accounts;
+                        }
+                    }
+                }
+            }
+        }
+        else if (bankName == 'SP' || bankName == 'Säästöpankki' || bankName == 'SÄÄSTÖPANKKI') {
+            document.getElementById("bankName").value = 'Säästöpankki';
+
+            for (var j = 0, len = banking.banks.length; j < len; j++) {
+
+                if (banking.banks[j].name == document.getElementById("bankName").value) {
+                    console.log('Valittu pankki ' + banking.banks[j].name);
+                    document.getElementById("bicCode").value = banking.banks[j].bicCode;
+                    for (var k = 0, len = banking.banks[j].getCustomers().length; k < len; k++) {
+                        console.log('pituus on ' + len + ' k on ' + k);
+                        console.log('Pankki id ' + banking.banks[j].bankId);
+                        console.log('customer bankIdAtCustomer ' + banking.banks[j].getCustomers()[k].bankIdAtCustomer);
+                        if (banking.banks[j].getCustomers()[k].bankIdAtCustomer == banking.banks[j].bankId) {
+                            console.log('j on ' + j);
+                            console.log('k on ' + k);
+                            document.getElementById("customers").value = banking.banks[j].getCustomers()[k].lastName + ',' + banking.banks[j].getCustomers()[k].firstName;
+                            var para = document.createElement("P");
+                            var customerListLong = ' -> ' + banking.banks[j].getCustomers()[k].customerId + ' -> ' + banking.banks[j].getCustomers()[k].lastName + ',' + banking.banks[j].getCustomers()[k].firstName;
+                            var t = document.createTextNode(customerListLong);
+                            para.appendChild(t);
+                            document.body.appendChild(para);
+                            console.log('asiakas ' + t);
+                            // document.getElementById("accounts").value = banking.banks[j].accounts;
+                        }
+                    }
+                }
+            }
+
+        }
+
+    }
+
+</script>
+<script>
+    function listCustomers (){
+        var bankName = document.getElementById('bankName').value;
+        console.log ('bankName -->'+ bankName);
+        if (bankName == 'OP' || bankName == 'OKO' || bankName == 'Osuuspankki' || bankName == 'OSUUSPANKKI') {
+            document.getElementById("bankName").value = 'Osuuspankki';
+            for (var j = 0, len = banking.banks.length; j < len; j++) {
+                if (banking.banks[j].name == document.getElementById("bankName").value) {
+                    console.log('Valittu pankki ' + banking.banks[j].name);
+                    document.getElementById("bicCode").value = banking.banks[j].bicCode;
+                    for (var k = 0, len = banking.banks[j].getCustomers().length; k < len; k++) {
+                        console.log('pituus on ' + len + ' k on ' + k);
+                        console.log('Pankki id ' + banking.banks[j].bankId);
+                        console.log('customer bankIdAtCustomer ' + banking.banks[j].getCustomers()[k].bankIdAtCustomer);
+                        if (banking.banks[j].getCustomers()[k].bankIdAtCustomer == banking.banks[j].bankId) {
+                            console.log('j on ' + j);
+                            console.log('k on ' + k);
+                            document.getElementById("customers").value = banking.banks[j].getCustomers()[k].lastName + ',' + banking.banks[j].getCustomers()[k].firstName;
+                            var para = document.createElement("P");
+                            var customerListLong = ' -> ' + banking.banks[j].getCustomers()[k].customerId + ' -> ' + banking.banks[j].getCustomers()[k].lastName + ',' + banking.banks[j].getCustomers()[k].firstName;
+                            var t = document.createTextNode(customerListLong);
+                            para.appendChild(t);
+                            document.body.appendChild(para);
+                            console.log('asiakas ' + t);
+                        }
+                    }
+                }
+            }
+        }
+        else if (bankName == 'SP' || bankName == 'Säästöpankki' || bankName == 'SÄÄSTÖPANKKI') {
+            document.getElementById("bankName").value = 'Säästöpankki';
+            for (var j = 0, len = banking.banks.length; j < len; j++) {
+                if (banking.banks[j].name == document.getElementById("bankName").value) {
+                    console.log('Valittu pankki ' + banking.banks[j].name);
+                    document.getElementById("bicCode").value = banking.banks[j].bicCode;
+                    for (var k = 0, len = banking.banks[j].getCustomers().length; k < len; k++) {
+                        console.log('pituus on ' + len + ' k on ' + k);
+                        console.log('Pankki id ' + banking.banks[j].bankId);
+                        console.log('customer bankIdAtCustomer ' + banking.banks[j].getCustomers()[k].bankIdAtCustomer);
+                        if (banking.banks[j].getCustomers()[k].bankIdAtCustomer == banking.banks[j].bankId) {
+                            console.log('j on ' + j);
+                            console.log('k on ' + k);
+                            document.getElementById("customers").value = banking.banks[j].getCustomers()[k].lastName + ',' + banking.banks[j].getCustomers()[k].firstName;
+                            var para = document.createElement("P");
+                            var customerListLong = ' -> ' + banking.banks[j].getCustomers()[k].customerId + ' -> ' + banking.banks[j].getCustomers()[k].lastName + ',' + banking.banks[j].getCustomers()[k].firstName;
+                            var t = document.createTextNode(customerListLong);
+                            para.appendChild(t);
+                            document.body.appendChild(para);
+                        }
+                    }
+                }
+            }
+
+        }
+
+    }
+
+</script>
+
+<script>
 function listAllCustomersAndBanks() {
-    //var firstName = document.getElementById('customerFirstName').value;
-    //console.log(firstName);
-    //var pBank = document.createElement("P");
-    //var tBank = document.createTextNode(banks[1].name);
-    //console.log(tBank);
-    //pBank.appendChild(tBank);
-    //document.body.appendChild(pBank);
+
     for (var j = 0, len = banking.banks.length; j < len; j++){
         var pBank = document.createElement("P");
         var tBank = document.createTextNode(banking.banks[j].name);
@@ -85,21 +224,15 @@ function listAllCustomersAndBanks() {
         pBank.appendChild(tBank);
         document.body.appendChild(pBank);
         for (var i = 0, len = banking.banks[j].getCustomers().length; i < len; i++) {
-            // console.log(customerL[i]);
-            // var i = 0;
-            //     document.getElementById("customer-list").innerHTML = bank.getCustomers()[i].lastName + "," + bank.getCustomers()[i].firstName + "<br>";
             var para = document.createElement("P");
-            var customerListLong = ' -> ' + banking.banks[j].getCustomers()[i].id + ' -> ' + banking.banks[j].getCustomers()[i].lastName + ',' + banking.banks[j].getCustomers()[i].firstName;
+            var customerListLong = ' -> bank id is:' + banking.banks[j].getCustomers()[i].bankIdAtCustomer + ' -> ' + banking.banks[j].getCustomers()[i].lastName + ',' + banking.banks[j].getCustomers()[i].firstName+', '+banking.banks[j].getCustomers()[i].customerId;
 
             var t = document.createTextNode(customerListLong);
             para.appendChild(t);
             document.body.appendChild(para);
-            // document.getElementById(my).innerHTML = "kissa <br> koira";
-            //i++;
-        }
+            }
     }
 }
-
 
 </script>
 
@@ -113,5 +246,40 @@ function listAllCustomersAndBanks() {
     }
 */
 </script>
+
+
+
+<p id="clicker">Click me!</p>
+
+<script>
+    // var clicker = document.getElementById('clicker');
+    // clicker.addEventListener('click', function(event){
+    //    alert(event.target.textContent);
+    // })
+</script>
+<!--
+
+<p>Select a new car from the list.</p>
+
+<select id="mySelect" onchange="myFunction()">
+    <option value="Audi">Audi
+    <option value="BMW">BMW
+    <option value="Mercedes">Mercedes
+    <option value="Volvo">Volvo
+*/
+</select>
+
+<!-- <p>When you select a new car, a function is triggered which outputs the value of the selected car.</p>
+
+<p id="demo"></p>
+!-->
+<script>
+  /*
+    function myFunction() {
+        var x = document.getElementById("mySelect").value;
+        document.getElementById("demo").innerHTML = "You selected: " + x;
+    }
+    */
+
 </body>
 </html>
